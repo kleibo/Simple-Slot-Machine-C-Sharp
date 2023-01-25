@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,13 +37,13 @@ namespace SlotMachine
                 else
                 {
                     // Spin the reels
-                    
+                    SpinReels(reels);
 
                     // Check for winning combinations
-                    
+                    winnings = CheckWin(reels, bet);
 
                     // Update balance
-                    
+                    balance += winnings;
 
                     // Print results
                     Console.WriteLine("Spin results: " + reels[0] + " " + reels[1] + " " + reels[2]);
@@ -58,3 +59,35 @@ namespace SlotMachine
             // Goodbye message
             Console.WriteLine("Thanks for playing! Goodbye!");
         }
+
+        // Method to spin the reels
+        static void SpinReels(int[] reels)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < reels.Length; i++)
+            {
+                reels[i] = rand.Next(1, 7);
+            }
+        }
+
+        // Method to check for winning combinations and calculate winnings
+        static int CheckWin(int[] reels, int bet)
+        {
+            int winnings = 0;
+
+            if (reels[0] == reels[1] && reels[1] == reels[2])
+            {
+                // Three of a kind
+                winnings = bet * 10;
+            }
+            else if (reels[0] == reels[1] || reels[1] == reels[2] || reels[0] == reels[2])
+            {
+                // Two of a kind
+                winnings = bet * 3;
+
+            }
+
+            return winnings;
+        }
+    }
+}
