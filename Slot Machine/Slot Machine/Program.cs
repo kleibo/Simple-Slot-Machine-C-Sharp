@@ -15,7 +15,7 @@ namespace SlotMachine
             int balance = 100;
             int bet = 0;
             int winnings = 0;
-            int[] reels = new int[3];
+            int[,] reels = new int[3,3];
             string playAgain = "y";
 
             // Welcome message
@@ -24,7 +24,7 @@ namespace SlotMachine
 
             // Main game loop
             while (playAgain == "y")
-            {
+            {   
                 // Get bet amount from user
                 Console.WriteLine("Enter bet amount: ");
                 bet = int.Parse(Console.ReadLine());
@@ -43,13 +43,23 @@ namespace SlotMachine
                     winnings = CheckWin(reels, bet);
 
                     // Update balance
-                    balance = balance - bet + winnings;
-                    
+                    balance -= bet;
+                    balance += winnings;
+
 
                     // Print results
-                    Console.WriteLine("Spin results: " + reels[0] + " " + reels[1] + " " + reels[2]);
+                    Console.WriteLine("Spin results: ");
+                    for (int i = 0; i < 3; i++)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            Console.Write(reels[i, j] + " ");
+                        }
+                        Console.WriteLine();
+                    }
                     Console.WriteLine("Winnings: " + winnings);
                     Console.WriteLine("New balance: " + balance);
+
                 }
 
                 // Ask if player wants to play again
@@ -62,30 +72,62 @@ namespace SlotMachine
         }
 
         // Method to spin the reels
-        static void SpinReels(int[] reels)
+        static void SpinReels(int[,] reels)
         {
             Random rand = new Random();
-            for (int i = 0; i < reels.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
-                reels[i] = rand.Next(1, 7);
+                for (int j = 0; j < 3; j++)
+                {
+                    reels[i, j] = rand.Next(1, 7);
+                }
             }
         }
 
         // Method to check for winning combinations and calculate winnings
-        static int CheckWin(int[] reels, int bet)
+        static int CheckWin(int[,] reels, int bet)
         {
             int winnings = 0;
+            bool colWin = false;
+            bool zagWin = false;
 
-            if (reels[0] == reels[1] && reels[1] == reels[2])
+            // Check for winning combinations in collinear lines
+            for (int i = 0; i < 3; i++)
             {
-                // Three of a kind
+                if (reels[i, 0] == reels[i, 1] && reels[i, 1] == reels[i, 2])
+                {
+                    colWin = true;
+                    break;
+                }
+                if (reels[0, i] == reels[1, i] && reels[1, i] == reels[2, i])
+                {
+                    colWin = true;
+                    break;
+                }
+            }
+
+            // Check for winning combinations in zigzag lines
+            if (reels[0, 0] == reels[1, 1] && reels[1, 1] == reels[2, 2])
+            {
+                zagWin = true;
+            }
+            if (reels[0, 2] == reels[1, 1] && reels[1, 1] == reels[2, 0])
+            {
+                zagWin = true;
+            }
+
+            // Calculate winnings
+            if (colWin)
+            {
+                winnings = bet * 5;
+            }
+            if (zagWin)
+            {
                 winnings = bet * 10;
             }
-            else if (reels[0] == reels[1] || reels[1] == reels[2] || reels[0] == reels[2])
+            if (colWin && zagWin)
             {
-                // Two of a kind
-                winnings = bet * 3;
-
+                winnings = bet * 20;
             }
 
             return winnings;
