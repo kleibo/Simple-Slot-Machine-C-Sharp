@@ -15,7 +15,7 @@ namespace SlotMachine
             int balance = 100;
             int bet = 0;
             int winnings = 0;
-            int[] reels = new int[3];
+            int[] reels = new int[9];
             string playAgain = "y";
 
             // Welcome message
@@ -43,7 +43,8 @@ namespace SlotMachine
                     winnings = CheckWin(reels, bet);
 
                     // Update balance
-                    balance = balance - bet + winnings;
+                    balance -= bet;
+                    balance += winnings;
                     
 
                     // Print results
