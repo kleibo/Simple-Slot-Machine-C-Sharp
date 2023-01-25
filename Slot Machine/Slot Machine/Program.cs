@@ -43,7 +43,8 @@ namespace SlotMachine
                     winnings = CheckWin(reels, bet);
 
                     // Update balance
-                    balance += winnings;
+                    balance = balance - bet + winnings;
+                    
 
                     // Print results
                     Console.WriteLine("Spin results: " + reels[0] + " " + reels[1] + " " + reels[2]);
