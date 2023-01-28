@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace SlotMachine
 {
-    class Simulation : Program
+    class Analysis : SlotMachine
     {
         public int TotalWinnings { get; set; }
         public int TotalBets { get; set; }
         public int TotalPlays { get; set; }
         public int[,] Reels { get; set; }
 
-        public Simulation(int TotalPlays)
+        public Analysis(int TotalPlays)
         {
             TotalWinnings = 0;
             TotalBets = 0;
