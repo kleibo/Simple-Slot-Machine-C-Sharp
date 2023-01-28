@@ -21,14 +21,13 @@ namespace SlotMachine
             Reels = new int[3, 3];
         }
 
-        public void MonteCarloSimulation()
+        public void MonteCarloSimulation(int bet)
         {
             
             for (int i = 0; i < TotalPlays; i++)
             {
                 // Spin the reels
                 SpinReels(Reels);
-                int bet = 10;
                 TotalBets += bet;
                 // Check for winning combinations
                 int winnings = CheckWin(Reels, bet);

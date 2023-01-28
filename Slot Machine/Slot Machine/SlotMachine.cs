@@ -15,10 +15,14 @@ namespace SlotMachine
             Game start = new();
             start.StartGame();
 
-            Analysis MonteCarlo = new();
-            MonteCarlo.MonteCarloSimulation();
-            MonteCarlo.PrintResults();
+            Console.WriteLine("Would you like to perform a Monte Carlo analysis? y/n");
+            String Answer = Console.ReadLine();
 
+            if (Answer == "y") {
+                Analysis MonteCarlo = new();
+                MonteCarlo.MonteCarloSimulation(100);
+                MonteCarlo.PrintResults();
+            }
 
         }
 
@@ -30,7 +34,7 @@ namespace SlotMachine
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    reels[i, j] = rand.Next(1, 7);
+                    reels[i, j] = rand.Next(1, 15);
                 }
             }
         }
