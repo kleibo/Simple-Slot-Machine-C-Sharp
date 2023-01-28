@@ -8,20 +8,20 @@ namespace SlotMachine
 {
     class Game : SlotMachine
     {
-        public int balance { get; set; }
-        public int bet { get; set; }
-        public int winnings { get; set; }
-        public int[,] reels { get; set; }
-        public string playAgain { get; set; }
+        public int Balance { get; set; }
+        public int Bet { get; set; }
+        public int Winnings { get; set; }
+        public int[,] Reels { get; set; }
+        public string PlayAgain { get; set; }
 
         public Game()
         {
             // Initialize variables
-            balance = 100;
-            bet = 0;
-            winnings = 0;
-            reels = new int[3, 3];
-            playAgain = "y";
+            Balance = 0;
+            Bet = 0;
+            Winnings = 0;
+            Reels = new int[3, 3];
+            PlayAgain = "y";
 
         }
 
@@ -30,31 +30,40 @@ namespace SlotMachine
         {
             // Welcome message
             Console.WriteLine("Welcome to the Slot Machine!");
-            Console.WriteLine("Your current balance is: " + bet);
-
+            Console.WriteLine("Your current balance is: " + Balance);
+            
             // Main game loop
-            while (playAgain == "y")
+            while (PlayAgain == "y")
             {
+                
+                if (Balance == 0) {
+                    Console.WriteLine("Please insert credits");
+                    // Have user insert money
+                    Console.WriteLine("Type amount to play with: ");
+                    Balance = int.Parse(Console.ReadLine());
+                }
+                
+
                 // Get bet amount from user
                 Console.WriteLine("Enter bet amount: ");
-                bet = int.Parse(Console.ReadLine());
+                Bet = int.Parse(Console.ReadLine());
 
                 // Check if bet amount is valid
-                if (bet > balance)
+                if (Bet > Balance)
                 {
                     Console.WriteLine("Invalid bet amount. Please enter a valid amount.");
                 }
                 else
                 {
                     // Spin the reels
-                    SpinReels(reels);
+                    SpinReels(Reels);
 
                     // Check for winning combinations
-                    winnings = CheckWin(reels, bet);
+                    Winnings = CheckWin(Reels, Bet);
 
                     // Update balance
-                    balance -= bet;
-                    balance += winnings;
+                    Balance -= Bet;
+                    Balance += Winnings;
 
 
                     // Print results
@@ -63,18 +72,18 @@ namespace SlotMachine
                     {
                         for (int j = 0; j < 3; j++)
                         {
-                            Console.Write(reels[i, j] + " ");
+                            Console.Write(Reels[i, j] + " ");
                         }
                         Console.WriteLine();
                     }
-                    Console.WriteLine("Winnings: " + winnings);
-                    Console.WriteLine("New balance: " + balance);
+                    Console.WriteLine("Winnings: " + Winnings);
+                    Console.WriteLine("New balance: " + Balance);
 
                 }
 
                 // Ask if player wants to play again
                 Console.WriteLine("Do you want to play again? (y/n)");
-                playAgain = Console.ReadLine();
+                PlayAgain = Console.ReadLine();
             }
 
             // Goodbye message

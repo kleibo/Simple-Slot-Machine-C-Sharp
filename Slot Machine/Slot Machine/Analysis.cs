@@ -13,16 +13,17 @@ namespace SlotMachine
         public int TotalPlays { get; set; }
         public int[,] Reels { get; set; }
 
-        public Analysis(int TotalPlays)
+        public Analysis()
         {
             TotalWinnings = 0;
             TotalBets = 0;
-            this.TotalPlays = TotalPlays;
+            TotalPlays = 100000;
             Reels = new int[3, 3];
         }
 
         public void MonteCarloSimulation()
         {
+            
             for (int i = 0; i < TotalPlays; i++)
             {
                 // Spin the reels

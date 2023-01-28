@@ -12,10 +12,10 @@ namespace SlotMachine
         static void Main(string[] args)
         {
 
-            Game start = new Game();
+            Game start = new();
             start.StartGame();
 
-            Analysis MonteCarlo = new Analysis(10000);
+            Analysis MonteCarlo = new();
             MonteCarlo.MonteCarloSimulation();
             MonteCarlo.PrintResults();
 
