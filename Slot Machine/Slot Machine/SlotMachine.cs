@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace SlotMachine
 {
-    class SlotMachine
-    {
+    class Driver { 
         static void Main(string[] args)
         {
 
@@ -21,11 +20,13 @@ namespace SlotMachine
             if (Answer == "y") {
                 Analysis MonteCarlo = new();
                 MonteCarlo.MonteCarloSimulation(100);
-                MonteCarlo.PrintResults();
+
             }
-
         }
-
+    }
+    h
+    class SlotMachine
+    {
         // Method to spin the reels
         public static void SpinReels(int[,] reels)
         {
