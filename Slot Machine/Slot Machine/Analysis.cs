@@ -49,6 +49,7 @@ namespace SlotMachine
             }
 
             double volatilityIndex = Math.Sqrt((TotalPlays * totalWinningsSquared) - (TotalWinnings * TotalWinnings)) / TotalPlays;
+            
             // Print the results of the simulation
             Console.WriteLine("Total winnings: " + TotalWinnings);
             Console.WriteLine("Total bets: " + TotalBets);

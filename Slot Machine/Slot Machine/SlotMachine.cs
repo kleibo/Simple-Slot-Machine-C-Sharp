@@ -24,7 +24,7 @@ namespace SlotMachine
             }
         }
     }
-    h
+    
     class SlotMachine
     {
         // Method to spin the reels
